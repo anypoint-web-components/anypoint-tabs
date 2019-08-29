@@ -197,7 +197,7 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
     }
     this._compatibility = value;
     this._compatibilityChanged(value);
-    this.requestUpdate('compatibility', value);
+    this.requestUpdate('compatibility', old);
   }
 
   get _contentClass() {
