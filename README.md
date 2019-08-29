@@ -33,7 +33,7 @@ npm install --save @anypoint-web-components/anypoint-tabs
 ```js
 import { LitElement, html } from 'lit-element';
 import '@anypoint-web-components/anypoint-tabs/anypoint-tabs.js';
-import '@anypoint-web-components/anypoint-tabs/anypoint-icon-button.js';
+import '@anypoint-web-components/anypoint-tabs/anypoint-tab.js';
 
 class SimpleElement extends ControlStateMixin(ButtonStateMixin(LitElement)) {
   render() {
