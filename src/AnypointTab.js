@@ -10,6 +10,7 @@ export class AnypointTab extends AnypointButton {
       :host {
         overflow: hidden;
         vertical-align: middle;
+        margin: 0;
       }
 
       .tab-content {
