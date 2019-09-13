@@ -74,6 +74,12 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
         margin: 0 4px;
       }
 
+      .icon {
+        width: 24px;
+        height: 24px;
+        display: block;
+      }
+
       #selectionBar {
         position: absolute;
         height: 0;
@@ -614,7 +620,8 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
       @mousedown="${this._onLeftScrollButtonDown}" tabindex="-1">
       <svg viewBox="0 0 24 24"
         preserveAspectRatio="xMidYMid meet"
-        focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+        focusable="false" style="pointer-events: none; display: block;"
+        class="icon">
         <g><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></g>
       </svg>
     </anypoint-icon-button>`;
@@ -631,7 +638,8 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
       @mousedown="${this._onRightScrollButtonDown}" tabindex="-1">
       <svg viewBox="0 0 24 24"
         preserveAspectRatio="xMidYMid meet"
-        focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+        focusable="false" style="pointer-events: none; display: block;"
+        class="icon">
         <g><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></g>
       </svg>
     </anypoint-icon-button>`;
