@@ -44,16 +44,16 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
       }
 
       #tabsContent:not(.scrollable),
-      #tabsContent.scrollable.fit-container {
+      #tabsContent.fit-container {
         display: flex;
         flex-direction: row;
       }
 
-      #tabsContent.scrollable.fit-container {
+      #tabsContent.fit-container {
         min-width: 100%;
       }
 
-      #tabsContent.scrollable.fit-container > ::slotted(*) {
+      #tabsContent.fit-container > ::slotted(*) {
         /* IE - prevent tabs from compressing when they should scroll. */
         flex: 1 0 auto;
       }
