@@ -310,6 +310,7 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
       super.connectedCallback();
     }
     this.addEventListener('resize', this._sizingHandler);
+    this.addEventListener('iron-resize', this._sizingHandler);
     this.addEventListener('items-changed', this._itemsHandler);
     this.addEventListener('select', this._selectHandler);
     this.addEventListener('deselect', this._deselectHandler);
@@ -323,6 +324,7 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
     this.__selectionBar = null;
     this.__tabsContainer = null;
     this.removeEventListener('resize', this._sizingHandler);
+    this.removeEventListener('iron-resize', this._sizingHandler);
     this.removeEventListener('items-changed', this._itemsHandler);
     this.removeEventListener('select', this._selectHandler);
     this.removeEventListener('deselect', this._deselectHandler);
