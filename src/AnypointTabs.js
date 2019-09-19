@@ -90,8 +90,7 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
         -webkit-transform: scale(0);
         transform: scale(0);
         transform-origin: left center;
-        transition-duration: 0.15s;
-        transition: transform;
+        transition: transform 0.15s cubic-bezier(0.4, 0.0, 1, 1);
         z-index: var(--anypoint-tabs-selection-bar-zindex);
       }
 
