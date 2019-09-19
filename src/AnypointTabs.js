@@ -91,6 +91,7 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
         transform: scale(0);
         transform-origin: left center;
         transition: transform;
+        z-index: var(--anypoint-tabs-selection-bar-zindex);
       }
 
       #selectionBar.align-bottom {
