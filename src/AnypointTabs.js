@@ -87,9 +87,10 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
         left: 0;
         right: 0;
         border-bottom: 2px solid var(--anypoint-tabs-selection-bar-color, var(--accent-color));
-          -webkit-transform: scale(0);
+        -webkit-transform: scale(0);
         transform: scale(0);
         transform-origin: left center;
+        transition-duration: 0.15s;
         transition: transform;
         z-index: var(--anypoint-tabs-selection-bar-zindex);
       }
