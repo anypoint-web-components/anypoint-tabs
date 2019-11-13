@@ -191,18 +191,6 @@ describe('AnypointTabs', () => {
       const element = await basicFixture();
       assert.equal(element._leftButtonClass, 'hidden');
     });
-
-    it('returns "not-visible" when _leftHidden', async () => {
-      const element = await scrollableFixture();
-      element._leftHidden = true;
-      assert.equal(element._leftButtonClass, 'not-visible');
-    });
-
-    it('returns "hidden" when _leftHidden', async () => {
-      const element = await scrollableFixture();
-      element.hideScrollButtons = true;
-      assert.equal(element._leftButtonClass, 'hidden');
-    });
   });
 
   describe('_rightButtonClass', () => {
@@ -216,18 +204,48 @@ describe('AnypointTabs', () => {
       assert.equal(element._rightButtonClass, 'hidden');
     });
 
-    it('returns "not-visible" when _rightHidden', async () => {
-      const element = await scrollableFixture();
-      element._rightHidden = true;
-      assert.equal(element._rightButtonClass, 'not-visible');
-    });
-
     it('returns "hidden" when _leftHidden', async () => {
       const element = await scrollableFixture();
       element.hideScrollButtons = true;
       assert.equal(element._rightButtonClass, 'hidden');
     });
   });
+
+  describe('_onRightScrollButtonDown', () => {
+    it('defines holdJob when scrolling right', async () => {
+      const element = await scrollableFixture()
+      element._holdJob = null
+      element._onRightScrollButtonDown()
+      assert.notEqual(element._holdJob, null)
+    })
+
+    it('clears holdJob when rightHidden is true', async () => {
+      const element = await scrollableFixture()
+      element._holdJob = null
+      element._onRightScrollButtonDown()
+      element._rightHidden = true
+      element._scrollToRight()
+      assert.equal(element._holdJob, null)
+    })
+  })
+
+  describe('_onLeftScrollButtonDown', () => {
+    it('defines holdJob when scrolling left ', async () => {
+      const element = await scrollableFixture()
+      element._holdJob = null
+      element._onLeftScrollButtonDown()
+      assert.notEqual(element._holdJob, null)
+    })
+
+    it('clears holdJob when leftHidden is true', async () => {
+      const element = await scrollableFixture()
+      element._holdJob = null
+      element._onLeftScrollButtonDown()
+      element._leftHidden = true
+      element._scrollToLeft()
+      assert.equal(element._holdJob, null)
+    })
+  })
 
   describe('_tabsContainer', () => {
     let element;

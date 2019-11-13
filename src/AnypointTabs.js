@@ -62,11 +62,6 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
         display: none;
       }
 
-      .not-visible {
-        opacity: 0;
-        cursor: default;
-      }
-
       anypoint-icon-button {
         width: 40px;
         height: 40px;
@@ -556,9 +551,6 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
     if (!scrollable || hideScrollButtons) {
       return 'hidden';
     }
-    if (isHidden) {
-      return 'not-visible';
-    }
     return '';
   }
 
@@ -579,11 +571,19 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
   }
 
   _scrollToLeft() {
-    this._affectScroll(-this._step);
+    if (this._leftHidden) {
+      this._onScrollButtonUp()
+    } else {
+      this._affectScroll(-this._step);
+    }
   }
 
   _scrollToRight() {
-    this._affectScroll(this._step);
+    if (this._rightHidden) {
+      this._onScrollButtonUp()
+    } else {
+      this._affectScroll(this._step);
+    }
   }
 
   _touchMove(e) {
@@ -617,6 +617,7 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
     return html`<anypoint-icon-button
       aria-label="Activate to move tabs left"
       class="${this._leftButtonClass}"
+      .disabled="${this._leftHidden}"
       @mouseup="${this._onScrollButtonUp}"
       @mousedown="${this._onLeftScrollButtonDown}" tabindex="-1">
       <svg viewBox="0 0 24 24"
@@ -635,6 +636,7 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
     return html`<anypoint-icon-button
       aria-label="Activate to move tabs right"
       class="${this._rightButtonClass}"
+      .disabled="${this._rightHidden}"
       @mouseup="${this._onScrollButtonUp}"
       @mousedown="${this._onRightScrollButtonDown}" tabindex="-1">
       <svg viewBox="0 0 24 24"
