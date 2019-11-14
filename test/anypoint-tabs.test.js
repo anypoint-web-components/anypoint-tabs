@@ -314,8 +314,9 @@ describe('AnypointTabs', () => {
 
     it('sets bar posittion once visible', async () => {
       element.removeAttribute('hidden');
-      element.selected = 0;
-      checkSelectionBar(element, element.items[0]);
+      element.selected = 1;
+      await aTimeout(200);
+      checkSelectionBar(element, element.items[1]);
     });
   });
 
@@ -335,7 +336,7 @@ describe('AnypointTabs', () => {
     });
 
     it('sets bar position under selected tab', async () => {
-      await aTimeout(20);
+      await aTimeout(200);
       const tab = element.items[1];
       checkSelectionBar(element, tab);
     });
@@ -347,6 +348,7 @@ describe('AnypointTabs', () => {
       element.noSlide = true;
       const tab = element.items[2];
       MockInteractions.tap(tab);
+      await aTimeout(200);
       checkSelectionBar(element, tab);
     });
 
