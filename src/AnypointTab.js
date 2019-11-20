@@ -5,7 +5,7 @@ import { AnypointButton } from '@anypoint-web-components/anypoint-button/src/Any
 export class AnypointTab extends AnypointButton {
   get styles() {
     return [
-      AnypointButton.styles,
+      super.styles,
       css`
       :host {
         overflow: hidden;
