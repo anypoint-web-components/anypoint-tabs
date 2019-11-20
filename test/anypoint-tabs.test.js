@@ -294,7 +294,7 @@ describe('AnypointTabs', () => {
     it('sets noink on dynamically added child', async () => {
       const tab = document.createElement('anypoint-tab');
       element.appendChild(tab);
-      await aTimeout();
+      await aTimeout(200);
       assert.isTrue(tab.noink);
     });
 
