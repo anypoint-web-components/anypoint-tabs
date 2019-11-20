@@ -5,7 +5,7 @@ import '@anypoint-web-components/anypoint-button/anypoint-icon-button.js';
 import '@polymer/iron-icon/iron-icon.js';
 
 export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElement)) {
-  static get styles() {
+  get styles() {
     return css`
       :host {
         display: flex;
@@ -666,7 +666,7 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
     const startEvent = scrollable ? _touchstartConfig : undefined;
     const moveEvent = scrollable ? _touchmoveConfig : undefined;
     const endEvent = scrollable ? _touchendConfig : undefined;
-    return html`
+    return html`<style>${this.styles}</style>
       ${this._leftButtonTemplate(scrollable)}
       <div
         id="tabsContainer"

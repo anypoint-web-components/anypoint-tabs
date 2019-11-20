@@ -4,7 +4,7 @@ import { ButtonStateMixin, ControlStateMixin } from
 import '@polymer/paper-ripple/paper-ripple.js';
 
 export class AnypointTab extends ButtonStateMixin(ControlStateMixin(LitElement)) {
-  static get styles() {
+  get styles() {
     return css`
       :host {
         display: inline-flex;
@@ -117,7 +117,7 @@ export class AnypointTab extends ButtonStateMixin(ControlStateMixin(LitElement))
   }
 
   render() {
-    return html`
+    return html`<style>${this.styles}</style>
     <div class="tab-content">
       <slot></slot>
     </div>

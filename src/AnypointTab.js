@@ -3,7 +3,7 @@ import '@polymer/paper-ripple/paper-ripple.js';
 import { AnypointButton } from '@anypoint-web-components/anypoint-button/src/AnypointButton.js';
 
 export class AnypointTab extends AnypointButton {
-  static get styles() {
+  get styles() {
     return [
       AnypointButton.styles,
       css`
@@ -107,7 +107,7 @@ export class AnypointTab extends AnypointButton {
   render() {
     const { noink, legacy } = this;
     const stopRipple = !!noink || !!legacy;
-    return html`
+    return html`<style>${this.styles}</style>
       <div class="tab-content">
         <slot></slot>
       </div>
