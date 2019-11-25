@@ -308,6 +308,7 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'tablist');
     }
+    /* istanbul ignore else */
     if (super.connectedCallback) {
       super.connectedCallback();
     }
@@ -320,6 +321,7 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
   }
 
   disconnectedCallback() {
+    /* istanbul ignore else */
     if (super.disconnectedCallback) {
       super.disconnectedCallback();
     }

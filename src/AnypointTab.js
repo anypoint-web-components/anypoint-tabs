@@ -87,19 +87,23 @@ export class AnypointTab extends AnypointButton {
       const nodes = slot.assignedNodes();
       let target;
       for (let i = 0; i < nodes.length; i++) {
+        /* istanbul ignore if */
         if (nodes[i].localName === 'a') {
           target = nodes[i];
           break;
         }
       }
+      /* istanbul ignore else */
       if (!target) {
         return;
       }
       // Don't get stuck in a loop delegating
       // the listener from the child anchor
+      /* istanbul ignore next */
       if (e.target === target) {
         return;
       }
+      /* istanbul ignore next */
       target.click();
     }
   }
