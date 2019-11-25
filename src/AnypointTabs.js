@@ -230,13 +230,13 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
   }
 
   get _leftButtonClass() {
-    const { _leftHidden, scrollable, hideScrollButtons } = this;
-    return this._computeScrollButtonClass(_leftHidden, scrollable, hideScrollButtons);
+    const { scrollable, hideScrollButtons } = this;
+    return this._computeScrollButtonClass(scrollable, hideScrollButtons);
   }
 
   get _rightButtonClass() {
-    const { _rightHidden, scrollable, hideScrollButtons } = this;
-    return this._computeScrollButtonClass(_rightHidden, scrollable, hideScrollButtons);
+    const { scrollable, hideScrollButtons } = this;
+    return this._computeScrollButtonClass(scrollable, hideScrollButtons);
   }
 
   get _tabsContainer() {
@@ -553,7 +553,7 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
     }
   }
 
-  _computeScrollButtonClass(isHidden, scrollable, hideScrollButtons) {
+  _computeScrollButtonClass(scrollable, hideScrollButtons) {
     if (!scrollable || hideScrollButtons) {
       return 'hidden';
     }
