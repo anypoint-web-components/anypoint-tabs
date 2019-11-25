@@ -401,6 +401,9 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
 
   _affectScroll(dx) {
     const node = this._tabsContainer;
+    if (!node) {
+      return;
+    }
     node.scrollLeft += dx;
     const scrollLeft = node.scrollLeft;
     this._leftHidden = scrollLeft === 0;
@@ -536,6 +539,9 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
 
   _scrollToSelectedIfNeeded(tabWidth, tabOffsetLeft) {
     const node = this._tabsContainer;
+    if (!node) {
+      return;
+    }
     let left = tabOffsetLeft - node.scrollLeft;
     if (left < 0) {
       node.scrollLeft += left;
