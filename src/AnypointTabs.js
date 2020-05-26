@@ -1,121 +1,33 @@
-import { html, css, LitElement } from 'lit-element';
-import { AnypointMenubarMixin } from '@anypoint-web-components/anypoint-menu-mixin/anypoint-menubar-mixin.js';
-import { ArcResizableMixin } from '@advanced-rest-client/arc-resizable-mixin/arc-resizable-mixin.js';
+import { html, LitElement } from 'lit-element';
+import { AnypointMenubarMixin } from '@anypoint-web-components/anypoint-menu-mixin';
+import { ArcResizableMixin } from '@advanced-rest-client/arc-resizable-mixin';
 import '@anypoint-web-components/anypoint-button/anypoint-icon-button.js';
 import '@polymer/iron-icon/iron-icon.js';
+import styles from './TabsStyles.js';
 
-export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElement)) {
+/* eslint-disable no-param-reassign */
+/* eslint-disable class-methods-use-this */
+
+/**
+ * Calculates value in percentages
+ * @param {number} w Element width
+ * @param {number} w0 Parent width
+ * @return {number} The percentage of element's width relative to parent.
+ */
+export function calcPercent(w, w0) {
+  return (100 * w) / w0;
+}
+
+/**
+ * @mixes AnypointMenubarMixin
+ * @mixes ArcResizableMixin
+ * @extends LitElement
+ */
+export class AnypointTabs extends AnypointMenubarMixin(
+  ArcResizableMixin(LitElement)
+) {
   get styles() {
-    return css`
-      :host {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        height: 48px;
-        font-size: 1rem;
-        font-weight: 500;
-        overflow: hidden;
-        user-select: none;
-        /* NOTE: Both values are needed, since some phones require the value to be "transparent". */
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        -webkit-tap-highlight-color: transparent;
-      }
-
-      :host(:dir(rtl)) {
-        flex-direction: row-reverse;
-      }
-
-      #tabsContainer {
-        position: relative;
-        height: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        flex: 1 1 auto;
-      }
-
-      #tabsContent {
-        height: 100%;
-        flex-basis: auto;
-      }
-
-      #tabsContent.scrollable {
-        position: absolute;
-        white-space: nowrap;
-      }
-
-      #tabsContent:not(.scrollable),
-      #tabsContent.fit-container {
-        display: flex;
-        flex-direction: row;
-      }
-
-      #tabsContent.fit-container {
-        min-width: 100%;
-      }
-
-      #tabsContent.fit-container > ::slotted(*) {
-        /* IE - prevent tabs from compressing when they should scroll. */
-        flex: 1 0 auto;
-      }
-
-      .hidden {
-        display: none;
-      }
-
-      anypoint-icon-button {
-        width: 40px;
-        height: 40px;
-        margin: 0 4px;
-      }
-
-      .icon {
-        width: 24px;
-        height: 24px;
-        display: block;
-        fill: currentColor;
-      }
-
-      #selectionBar {
-        position: absolute;
-        height: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        border-bottom: 2px solid var(--anypoint-tabs-selection-bar-color, var(--accent-color));
-        -webkit-transform: scale(0);
-        transform: scale(0);
-        transform-origin: left center;
-        transition: transform 0.15s cubic-bezier(0.4, 0.0, 1, 1);
-        z-index: var(--anypoint-tabs-selection-bar-zindex);
-      }
-
-      #selectionBar.align-bottom {
-        top: 0;
-        bottom: auto;
-      }
-
-      #selectionBar.expand {
-        transition-duration: 0.15s;
-        transition-timing-function: cubic-bezier(0.4, 0.0, 1, 1);
-      }
-
-      #selectionBar.contract {
-        transition-duration: 0.18s;
-        transition-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
-      }
-
-      #tabsContent > ::slotted(*) {
-        height: 100%;
-      }
-
-      #tabsContent:not(.fit-container) > ::slotted(*) {
-        flex: none;
-      }
-
-      :host([compatibility]) ::slotted(anypoint-tab) {
-        text-transform: none;
-      }
-    `;
+    return styles;
   }
 
   static get properties() {
@@ -176,7 +88,7 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
       legacy: { type: Boolean },
 
       _leftHidden: { type: Boolean },
-      _rightHidden: { type: Boolean }
+      _rightHidden: { type: Boolean },
     };
   }
 
@@ -223,7 +135,8 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
     const { noBar, alignBottom } = this;
     if (noBar) {
       return 'hidden';
-    } else if (alignBottom) {
+    }
+    if (alignBottom) {
       return 'align-bottom';
     }
     return '';
@@ -241,21 +154,27 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
 
   get _tabsContainer() {
     if (!this.__tabsContainer) {
-      this.__tabsContainer = this.shadowRoot.querySelector('#tabsContainer');
+      this.__tabsContainer = /** @type HTMLDivElement */ (this.shadowRoot.querySelector(
+        '#tabsContainer'
+      ));
     }
     return this.__tabsContainer;
   }
 
   get _tabsContent() {
     if (!this.__tabsContent) {
-      this.__tabsContent = this.shadowRoot.querySelector('#tabsContent');
+      this.__tabsContent = /** @type HTMLDivElement */ (this.shadowRoot.querySelector(
+        '#tabsContent'
+      ));
     }
     return this.__tabsContent;
   }
 
   get _selectionBar() {
     if (!this.__selectionBar) {
-      this.__selectionBar = this.shadowRoot.querySelector('#selectionBar');
+      this.__selectionBar = /** @type HTMLDivElement */ (this.shadowRoot.querySelector(
+        '#selectionBar'
+      ));
     }
     return this.__selectionBar;
   }
@@ -284,6 +203,14 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
     this._pendingActivationTimeout = undefined;
     this.selectable = 'anypoint-tab';
     this.autoselectDelay = 0;
+    this.noBar = false;
+    this.noSlide = false;
+    this.scrollable = false;
+    this.fitContainer = false;
+    this.disableDrag = false;
+    this.hideScrollButtons = false;
+    this.alignBottom = false;
+    this.autoselect = false;
 
     this._step = 10;
     this._holdDelay = 1;
@@ -292,15 +219,15 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
 
     this._touchstartConfig = {
       handleEvent: this._touchStart,
-      passive: true
+      passive: true,
     };
     this._touchendConfig = {
       handleEvent: this._touchEnd,
-      passive: true
+      passive: true,
     };
     this._touchmoveConfig = {
       handleEvent: this._touchMove,
-      passive: true
+      passive: true,
     };
   }
 
@@ -407,7 +334,7 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
       return;
     }
     node.scrollLeft += dx;
-    const scrollLeft = node.scrollLeft;
+    const { scrollLeft } = node;
     this._leftHidden = scrollLeft === 0;
     this._rightHidden = scrollLeft === this._tabContainerScrollSize;
   }
@@ -432,8 +359,8 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
     const tabOffsetLeft = tabRect.left - containerRect.left;
 
     this._pos = {
-      width: this._calcPercent(tabRect.width, containerWidth),
-      left: this._calcPercent(tabOffsetLeft, containerWidth)
+      width: calcPercent(tabRect.width, containerWidth),
+      left: calcPercent(tabOffsetLeft, containerWidth),
     };
 
     if (this.noSlide || !old) {
@@ -460,12 +387,20 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
 
     if (moveRight) {
       this._positionBar(
-          this._calcPercent(tabRect.left + tabRect.width - oldRect.left, containerWidth) - m,
-          this._left);
+        calcPercent(
+          tabRect.left + tabRect.width - oldRect.left,
+          containerWidth
+        ) - m,
+        this._left
+      );
     } else {
       this._positionBar(
-          this._calcPercent(oldRect.left + oldRect.width - tabRect.left, containerWidth) - m,
-          this._calcPercent(tabOffsetLeft, containerWidth) + m);
+        calcPercent(
+          oldRect.left + oldRect.width - tabRect.left,
+          containerWidth
+        ) - m,
+        calcPercent(tabOffsetLeft, containerWidth) + m
+      );
     }
 
     if (this.scrollable) {
@@ -479,11 +414,9 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
 
     this._width = width;
     this._left = left;
-    this._selectionBar.style.transform = `translateX(${left}%) scaleX(${width / 100})`;
-  }
-
-  _calcPercent(w, w0) {
-    return 100 * w / w0;
+    this._selectionBar.style.transform = `translateX(${left}%) scaleX(${
+      width / 100
+    })`;
   }
 
   _activateHandler(e) {
@@ -500,20 +433,24 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
 
   _scheduleActivation(item, delay) {
     this._pendingActivationItem = item;
-    this._pendingActivationTimeout =
-        setTimeout(() => this._delayedActivation(), delay);
+    this._pendingActivationTimeout = setTimeout(
+      () => this._delayedActivation(),
+      delay
+    );
   }
 
   _delayedActivation() {
     const item = this._pendingActivationItem;
     this._pendingActivationItem = undefined;
     this._pendingActivationTimeout = undefined;
-    item.dispatchEvent(new CustomEvent(this.activateEvent, { bubbles: true, cancelable: true }));
+    item.dispatchEvent(
+      new CustomEvent(this.activateEvent, { bubbles: true, cancelable: true })
+    );
   }
 
   _cancelPendingActivation() {
     if (this._pendingActivationTimeout !== undefined) {
-      this.clearTimeout(this._pendingActivationTimeout);
+      clearTimeout(this._pendingActivationTimeout);
       this._pendingActivationItem = undefined;
       this._pendingActivationTimeout = undefined;
     }
@@ -548,7 +485,7 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
     if (left < 0) {
       node.scrollLeft += left;
     } else {
-      left += (tabWidth - node.offsetWidth);
+      left += tabWidth - node.offsetWidth;
       if (left > 0) {
         node.scrollLeft += left;
       }
@@ -574,13 +511,15 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
 
   _onRightScrollButtonDown() {
     this._scrollToRight();
-    this._holdJob =
-        setInterval(this._scrollToRight.bind(this), this._holdDelay);
+    this._holdJob = setInterval(
+      this._scrollToRight.bind(this),
+      this._holdDelay
+    );
   }
 
   _scrollToLeft() {
     if (this._leftHidden) {
-      this._onScrollButtonUp()
+      this._onScrollButtonUp();
     } else {
       this._affectScroll(-this._step);
     }
@@ -588,12 +527,15 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
 
   _scrollToRight() {
     if (this._rightHidden) {
-      this._onScrollButtonUp()
+      this._onScrollButtonUp();
     } else {
       this._affectScroll(this._step);
     }
   }
 
+  /**
+   * @param {TouchEvent} e
+   */
   _touchMove(e) {
     const touches = e.changedTouches;
     const touch = touches && touches[0];
@@ -605,8 +547,11 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
     this._scroll(ddx);
   }
 
+  /**
+   * @param {TouchEvent} e
+   */
   _touchStart(e) {
-    const touches = e.touches;
+    const { touches } = e;
     const touch = touches && touches[0];
     if (!touch) {
       return;
@@ -627,11 +572,16 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
       class="${this._leftButtonClass}"
       .disabled="${this._leftHidden}"
       @mouseup="${this._onScrollButtonUp}"
-      @mousedown="${this._onLeftScrollButtonDown}" tabindex="-1">
-      <svg viewBox="0 0 24 24"
+      @mousedown="${this._onLeftScrollButtonDown}"
+      tabindex="-1"
+    >
+      <svg
+        viewBox="0 0 24 24"
         preserveAspectRatio="xMidYMid meet"
-        focusable="false" style="pointer-events: none; display: block;"
-        class="icon">
+        focusable="false"
+        style="pointer-events: none; display: block;"
+        class="icon"
+      >
         <g><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></g>
       </svg>
     </anypoint-icon-button>`;
@@ -646,11 +596,16 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
       class="${this._rightButtonClass}"
       .disabled="${this._rightHidden}"
       @mouseup="${this._onScrollButtonUp}"
-      @mousedown="${this._onRightScrollButtonDown}" tabindex="-1">
-      <svg viewBox="0 0 24 24"
+      @mousedown="${this._onRightScrollButtonDown}"
+      tabindex="-1"
+    >
+      <svg
+        viewBox="0 0 24 24"
         preserveAspectRatio="xMidYMid meet"
-        focusable="false" style="pointer-events: none; display: block;"
-        class="icon">
+        focusable="false"
+        style="pointer-events: none; display: block;"
+        class="icon"
+      >
         <g><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></g>
       </svg>
     </anypoint-icon-button>`;
@@ -660,7 +615,8 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
     return html`<div
       id="selectionBar"
       class="${this._selectionClass}"
-      @transitionend="${this._onBarTransitionEnd}"></div>`;
+      @transitionend="${this._onBarTransitionEnd}"
+    ></div>`;
   }
 
   render() {
@@ -669,24 +625,26 @@ export class AnypointTabs extends AnypointMenubarMixin(ArcResizableMixin(LitElem
       _touchstartConfig,
       _touchmoveConfig,
       _touchendConfig,
-      scrollable
+      scrollable,
     } = this;
     const startEvent = scrollable ? _touchstartConfig : undefined;
     const moveEvent = scrollable ? _touchmoveConfig : undefined;
     const endEvent = scrollable ? _touchendConfig : undefined;
-    return html`<style>${this.styles}</style>
+    return html`<style>
+        ${this.styles}
+      </style>
       ${this._leftButtonTemplate(scrollable)}
       <div
         id="tabsContainer"
         @touchstart="${startEvent}"
         @touchmove="${moveEvent}"
-        @touchend="${endEvent}">
-      <div id="tabsContent" class="${_contentClass}">
-        ${this._selectionTemplate()}
-        <slot></slot>
+        @touchend="${endEvent}"
+      >
+        <div id="tabsContent" class="${_contentClass}">
+          ${this._selectionTemplate()}
+          <slot></slot>
+        </div>
       </div>
-    </div>
-    ${this._rightButtonTemplate(scrollable)}
-    `;
+      ${this._rightButtonTemplate(scrollable)} `;
   }
 }

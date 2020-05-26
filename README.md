@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/anypoint-web-components/anypoint-tabs.svg?branch=master)](https://travis-ci.org/anypoint-web-components/anypoint-tabs)
+[![Build Status](https://travis-ci.com/anypoint-web-components/anypoint-tabs.svg)](https://travis-ci.com/anypoint-web-components/anypoint-tabs)
 
 [![Published on NPM](https://img.shields.io/npm/v/@anypoint-web-components/anypoint-tabs.svg)](https://www.npmjs.com/package/@anypoint-web-components/anypoint-tabs)
 
