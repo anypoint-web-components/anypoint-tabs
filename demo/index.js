@@ -19,6 +19,12 @@ class ComponentDemo extends ArcDemoPage {
     ]);
     this._componentName = 'anypoint-tabs';
     this.demoStates = ['Material', 'Anypoint'];
+    this.darkThemeActive = false;
+    this.demoRtl = false;
+    this.demoAutoselect = false;
+    this.demoAlignBottom = false;
+    this.demoNoSlide = false;
+    this.dynamicTab = false;
 
     this._mainDemoStateHandler = this._mainDemoStateHandler.bind(this);
     this._toggleMainOption = this._toggleMainOption.bind(this);
@@ -26,14 +32,7 @@ class ComponentDemo extends ArcDemoPage {
 
   _mainDemoStateHandler(e) {
     const state = e.detail.value;
-    switch (state) {
-      case 0:
-        this.demoLegacy = false;
-        break;
-      case 1:
-        this.demoLegacy = true;
-        break;
-    }
+    this.demoLegacy = state === 1;
   }
 
   _toggleMainOption(e) {
@@ -214,4 +213,3 @@ class ComponentDemo extends ArcDemoPage {
 
 const instance = new ComponentDemo();
 instance.render();
-window.demo = instance;

@@ -4,6 +4,10 @@ import { AnypointButton } from '@anypoint-web-components/anypoint-button/src/Any
 
 export class AnypointTab extends AnypointButton {
   styles: CSSResult;
+  /**
+   * If true, the tab will forward keyboard clicks (enter/space) to the first anchor element found in its descendants
+   * @attribute
+   */
   link: boolean;
 
   connectedCallback(): void;

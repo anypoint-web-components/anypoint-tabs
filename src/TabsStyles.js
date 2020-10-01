@@ -84,6 +84,10 @@ export default css`
     z-index: var(--anypoint-tabs-selection-bar-zindex);
   }
 
+  :host([noslide]) #selectionBar {
+    transition: none;
+  }
+
   #selectionBar.align-bottom {
     top: 0;
     bottom: auto;

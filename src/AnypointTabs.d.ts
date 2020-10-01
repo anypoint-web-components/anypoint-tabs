@@ -13,46 +13,54 @@ import { ArcResizableMixin } from '@advanced-rest-client/arc-resizable-mixin';
  */
 export declare function calcPercent(w: number, w0: number): number;
 
-export declare interface AnypointTabs {
+export declare class AnypointTabs {
   styles: CSSResult;
 
   /**
    * If true, the bottom bar to indicate the selected tab will not be shown.
+   * @attribute
    */
   noBar: boolean;
   /**
    * If true, the slide effect for the bottom bar is disabled.
+   * @attribute
    */
   noSlide: boolean;
   /**
    * If true, tabs are scrollable and the tab width is based on the label
    * width.
+   * @attribute
    */
   scrollable: boolean;
   /**
    * If true, tabs expand to fit their container. This currently only applies
    * when scrollable is true.
+   * @attribute
    */
   fitContainer: boolean;
   /**
    * If true, dragging on the tabs to scroll is disabled.
+   * @attribute
    */
   disableDrag: boolean;
   /**
    * If true, scroll buttons (left/right arrow) will be hidden for scrollable
    * tabs.
+   * @attribute
    */
   hideScrollButtons: boolean;
 
   /**
    * If true, the tabs are aligned to bottom (the selection bar appears at the
    * top).
+   * @attribute
    */
   alignBottom: boolean;
 
   /**
    * If true, tabs are automatically selected when focused using the
    * keyboard.
+   * @attribute
    */
   autoselect: boolean;
 
@@ -60,10 +68,12 @@ export declare interface AnypointTabs {
    * The delay (in milliseconds) between when the user stops interacting
    * with the tabs through the keyboard and when the focused item is
    * automatically selected (if `autoselect` is true).
+   * @attribute
    */
   autoselectDelay: number;
   /**
    * Enables compatibility with Anypoint components.
+   * @attribute
    */
   compatibility: boolean;
   /**
@@ -94,7 +104,7 @@ export declare interface AnypointTabs {
 
   disconnectedCallback(): void;
 
-  _itemsHandler(e: CustomEvent): void;
+  _itemsHandler(): void;
 
   _sizingHandler(): void;
 
@@ -104,7 +114,7 @@ export declare interface AnypointTabs {
 
   _deselectHandler(): void;
 
-  _blurHandler(e: CustomEvent): void;
+  _blurHandler(e: Event): void;
 
   _updateDeselect(): void;
 
@@ -118,7 +128,7 @@ export declare interface AnypointTabs {
 
   _activateHandler(e: CustomEvent): void;
 
-  _onKeydown(e: CustomEvent): void;
+  _onKeydown(e: KeyboardEvent): void;
 
   _scheduleActivation(item: Element, delay: number): void;
 
@@ -160,5 +170,6 @@ export declare interface AnypointTabs {
 }
 
 
-export declare class AnypointTabs extends ArcResizableMixin, AnypointMenubarMixin, LitElement {
+export declare interface AnypointTabs extends ArcResizableMixin, AnypointMenubarMixin, LitElement {
+  onselect: EventListener;
 }

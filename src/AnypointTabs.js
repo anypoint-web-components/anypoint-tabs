@@ -1,9 +1,10 @@
 import { html, LitElement } from 'lit-element';
-import { AnypointMenubarMixin } from '@anypoint-web-components/anypoint-menu-mixin';
+import { MenubarMixin } from '@anypoint-web-components/anypoint-menu-mixin';
 import { ArcResizableMixin } from '@advanced-rest-client/arc-resizable-mixin';
 import '@anypoint-web-components/anypoint-button/anypoint-icon-button.js';
-import '@polymer/iron-icon/iron-icon.js';
 import styles from './TabsStyles.js';
+
+/** @typedef {import('./AnypointTab').AnypointTab} AnypointTab */
 
 /* eslint-disable no-param-reassign */
 /* eslint-disable class-methods-use-this */
@@ -19,13 +20,9 @@ export function calcPercent(w, w0) {
 }
 
 /**
- * @mixes AnypointMenubarMixin
- * @mixes ArcResizableMixin
- * @extends LitElement
+ * Tabs for anypoint web components
  */
-export class AnypointTabs extends AnypointMenubarMixin(
-  ArcResizableMixin(LitElement)
-) {
+export class AnypointTabs extends MenubarMixin(ArcResizableMixin(LitElement)) {
   get styles() {
     return styles;
   }
@@ -39,7 +36,7 @@ export class AnypointTabs extends AnypointMenubarMixin(
       /**
        * If true, the slide effect for the bottom bar is disabled.
        */
-      noSlide: { type: Boolean },
+      noSlide: { type: Boolean, reflect: true, },
       /**
        * If true, tabs are scrollable and the tab width is based on the label
        * width.
@@ -241,7 +238,7 @@ export class AnypointTabs extends AnypointMenubarMixin(
     }
     this.addEventListener('resize', this._sizingHandler);
     this.addEventListener('iron-resize', this._sizingHandler);
-    this.addEventListener('items-changed', this._itemsHandler);
+    this.addEventListener('itemschange', this._itemsHandler);
     this.addEventListener('select', this._selectHandler);
     this.addEventListener('deselect', this._deselectHandler);
     this.addEventListener('blur', this._blurHandler, true);
@@ -256,24 +253,24 @@ export class AnypointTabs extends AnypointMenubarMixin(
     this.__tabsContainer = null;
     this.removeEventListener('resize', this._sizingHandler);
     this.removeEventListener('iron-resize', this._sizingHandler);
-    this.removeEventListener('items-changed', this._itemsHandler);
+    this.removeEventListener('itemschange', this._itemsHandler);
     this.removeEventListener('select', this._selectHandler);
     this.removeEventListener('deselect', this._deselectHandler);
     this.removeEventListener('blur', this._blurHandler);
     this._cancelPendingActivation();
   }
 
-  _itemsHandler(e) {
+  _itemsHandler() {
     this._sizingHandler();
     if (!this.compatibility) {
       return;
     }
-    const items = e.detail.value || [];
+    // it is safe to cast this as `selectable` property is set to `anypoint-tab`.
+    const items = /** @type AnypointTab[] */ (this.items || []);
     items.forEach((item) => {
       item.noink = true;
     });
   }
-  // compatibility
 
   _sizingHandler() {
     if (this.__resizeDebounce) {
@@ -308,6 +305,9 @@ export class AnypointTabs extends AnypointMenubarMixin(
     this._deselectTimer = setTimeout(() => this._updateDeselect(), 1);
   }
 
+  /**
+   * @param {Event} e 
+   */
   _blurHandler(e) {
     if (e.target === this._pendingActivationItem) {
       this._cancelPendingActivation();
@@ -470,7 +470,7 @@ export class AnypointTabs extends AnypointMenubarMixin(
   }
 
   _compatibilityChanged(value) {
-    const items = this.items || [];
+    const items = /** @type AnypointTab[] */ (this.items || []);
     items.forEach((item) => {
       item.noink = value;
     });
