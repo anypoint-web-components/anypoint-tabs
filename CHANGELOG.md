@@ -131,3 +131,12 @@
 * updated Travis configuration to connect to Sauce Labs [0ca4f17](https://github.com/anypoint-web-components/anypoint-tabs/commit/0ca4f1750660368e2133f047fdbf1aed141ab52e) by Pawel
 
 
+<a name="0.1.12"></a>
+## [0.1.12](https://github.com/anypoint-web-components/anypoint-tabs/compare/0.1.11...0.1.12) (2020-10-01)
+
+### Update
+
+* minor fixes and deps update [5c5ae6e](https://github.com/anypoint-web-components/anypoint-tabs/commit/5c5ae6e8b44e64e8703fb68e87d4434b35e8840a) by Pawel Psztyc
+* [ci skip] automated merge master->stage. syncing main branches [7d660ee](https://github.com/anypoint-web-components/anypoint-tabs/commit/7d660eee040b71ca33fd7791f2ec69e383638bf3) by Ci agent
+
+
