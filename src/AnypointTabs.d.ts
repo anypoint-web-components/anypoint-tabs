@@ -1,5 +1,5 @@
 import { TemplateResult, LitElement, CSSResult } from 'lit-element';
-import { AnypointMenubarMixin } from '@anypoint-web-components/anypoint-menu-mixin';
+import { MenubarMixin } from '@anypoint-web-components/anypoint-menu-mixin';
 import { ArcResizableMixin } from '@advanced-rest-client/arc-resizable-mixin';
 
 /* eslint-disable no-param-reassign */
@@ -13,8 +13,8 @@ import { ArcResizableMixin } from '@advanced-rest-client/arc-resizable-mixin';
  */
 export declare function calcPercent(w: number, w0: number): number;
 
-export declare class AnypointTabs {
-  styles: CSSResult;
+export declare class AnypointTabs extends MenubarMixin(ArcResizableMixin(LitElement)) {
+  get styles(): CSSResult;
 
   /**
    * If true, the bottom bar to indicate the selected tab will not be shown.
@@ -167,9 +167,4 @@ export declare class AnypointTabs {
   _selectionTemplate(): TemplateResult;
 
   render(): TemplateResult;
-}
-
-
-export declare interface AnypointTabs extends ArcResizableMixin, AnypointMenubarMixin, LitElement {
-  onselect: EventListener;
 }

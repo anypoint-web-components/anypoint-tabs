@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.com/anypoint-web-components/anypoint-tabs.svg)](https://travis-ci.com/anypoint-web-components/anypoint-tabs)
-
-[![Published on NPM](https://img.shields.io/npm/v/@anypoint-web-components/anypoint-tabs.svg)](https://www.npmjs.com/package/@anypoint-web-components/anypoint-tabs)
+# Anypoint tabs
 
 This component is based on Material Design menu and adjusted for Anypoint platform components.
 
@@ -8,10 +6,15 @@ Anypoint web components are set of components that allows to build Anypoint enab
 
 Tabs organize content across different screens, data sets, and other interactions.
 
+[![Published on NPM](https://img.shields.io/npm/v/@anypoint-web-components/anypoint-tabs.svg)](https://www.npmjs.com/package/@anypoint-web-components/anypoint-tabs)
+
+[![tests](https://github.com/anypoint-web-components/anypoint-tabs/actions/workflows/tests.yml/badge.svg)](https://github.com/anypoint-web-components/anypoint-tabs/actions/workflows/tests.yml)
+
 ## Usage
 
 ### Installation
-```
+
+```sh
 npm install --save @anypoint-web-components/anypoint-tabs
 ```
 
@@ -57,11 +60,10 @@ window.customElements.define('simple-element', SimpleElement);
 
 Anypoint tabs comes with 2 predefined styles:
 
--   Material - (default) - Material Design styled tabs
--   Compatibility To provide compatibility with Anypoint design
+- Material - (default) - Material Design styled tabs
+- Compatibility To provide compatibility with Anypoint design
 
 See [Tabs](https://material.io/components/tabs/) documentation in Material Design documentation for principles and anatomy of tabs.
-
 
 ### Scrollable tabs
 
@@ -80,10 +82,10 @@ When tabs takes more place than available then set `scrollable` property to enab
 
 ### Fit container
 
-When the `fitcontainer` property is set the tabs expands to full width of the container.
+When the `fitContainer` property is set the tabs expands to full width of the container.
 
 ```html
-<anypoint-tabs selected="0" fitcontainer>
+<anypoint-tabs selected="0" fitContainer>
   <anypoint-tab>Tab one</anypoint-tab>
   <anypoint-tab>Tab two</anypoint-tab>
   <anypoint-tab>Tab three</anypoint-tab>
@@ -112,7 +114,6 @@ render() {
 }
 ```
 
-
 ## Development
 
 ```sh
@@ -128,6 +129,7 @@ npm start
 ```
 
 ### Running the tests
+
 ```sh
 npm test
 ```

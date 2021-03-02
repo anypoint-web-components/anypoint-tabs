@@ -5,6 +5,7 @@ import { AnypointButton } from '@anypoint-web-components/anypoint-button/src/Any
 export class AnypointTab extends AnypointButton {
   get styles() {
     return [
+      // @ts-ignore
       super.styles,
       css`
         :host {
@@ -104,8 +105,8 @@ export class AnypointTab extends AnypointButton {
   }
 
   render() {
-    const { noink, legacy } = this;
-    const stopRipple = !!noink || !!legacy;
+    const { noink, compatibility } = this;
+    const stopRipple = !!noink || !!compatibility;
     return html`<style>
         ${this.styles}
       </style>
