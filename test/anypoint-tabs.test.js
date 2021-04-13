@@ -16,7 +16,7 @@ describe('AnypointTabs', () => {
   }
 
   async function basicFixture() {
-    return await fixture(html`
+    return fixture(html`
       <anypoint-tabs>
         ${renderTabs(15)}
       </anypoint-tabs>
@@ -24,18 +24,18 @@ describe('AnypointTabs', () => {
   }
 
   async function selectedFixture() {
-    return await fixture(html`
+    return fixture(html`
       <anypoint-tabs selected="1">
         ${renderTabs(15)}
       </anypoint-tabs>
     `);
   }
 
-  async function scrollableFixture() {
+  async function scrollableFixture(tabsAmount = 15) {
     const container = await fixture(html`
       <div style="width: 600px;">
       <anypoint-tabs selected="0" scrollable>
-        ${renderTabs(15)}
+        ${renderTabs(tabsAmount)}
       </anypoint-tabs>
       </div>
     `);
@@ -43,7 +43,7 @@ describe('AnypointTabs', () => {
   }
 
   async function fitContainerFixture() {
-    return await fixture(html`
+    return fixture(html`
       <anypoint-tabs fitContainer>
         ${renderTabs(3)}
       </anypoint-tabs>
@@ -51,7 +51,7 @@ describe('AnypointTabs', () => {
   }
 
   async function noBarFixture() {
-    return await fixture(html`
+    return fixture(html`
       <anypoint-tabs nobar>
         ${renderTabs(3)}
       </anypoint-tabs>
@@ -59,7 +59,7 @@ describe('AnypointTabs', () => {
   }
 
   async function alignBottomFixture() {
-    return await fixture(html`
+    return fixture(html`
       <anypoint-tabs alignbottom>
         ${renderTabs(3)}
       </anypoint-tabs>
@@ -67,7 +67,7 @@ describe('AnypointTabs', () => {
   }
 
   async function compatibilityFixture() {
-    return await fixture(html`
+    return fixture(html`
       <anypoint-tabs compatibility>
         ${renderTabs(3)}
       </anypoint-tabs>
@@ -75,7 +75,7 @@ describe('AnypointTabs', () => {
   }
 
   async function hiddenFixture() {
-    return await fixture(html`
+    return fixture(html`
       <anypoint-tabs hidden>
         ${renderTabs(3)}
       </anypoint-tabs>
@@ -83,7 +83,7 @@ describe('AnypointTabs', () => {
   }
 
   async function autoselectFixture() {
-    return await fixture(html`
+    return fixture(html`
       <anypoint-tabs autoselect>
         ${renderTabs(4)}
       </anypoint-tabs>
@@ -125,8 +125,8 @@ describe('AnypointTabs', () => {
   });
 
   describe('a11y', () => {
-    async function basicFixture() {
-      return await fixture(html`
+    async function basicTabsFixture() {
+      return fixture(html`
         <anypoint-tabs>
           <anypoint-tab>1</anypoint-tab>
           <anypoint-tab>2</anypoint-tab>
@@ -136,12 +136,12 @@ describe('AnypointTabs', () => {
     }
 
     it('is accessible', async () => {
-      const element = await basicFixture();
+      const element = await basicTabsFixture();
       await assert.isAccessible(element);
     });
 
     it('has role attribute', async () => {
-      const element = await basicFixture();
+      const element = await basicTabsFixture();
       assert.equal(element.getAttribute('role'), 'tablist');
     });
   });
@@ -190,6 +190,12 @@ describe('AnypointTabs', () => {
     it('returns "hidden" when not scrollable', async () => {
       const element = await basicFixture();
       assert.equal(element._leftButtonClass, 'hidden');
+    });
+
+    it('should hide buttons if not enough tabs to scroll', async () => {
+      const element = await scrollableFixture(1);
+      await aTimeout(20);
+      assert.isTrue(element.hideScrollButtons);
     });
   });
 
@@ -458,7 +464,9 @@ describe('AnypointTabs', () => {
     it('sets __lastTouchX when touch is starting', async () => {
       const tab = element.items[4];
       const e = new CustomEvent('touchstart', { bubbles: true, composed: true });
-      e.touches = e.changedTouches = [{ pageX: 200, pageY: 200, clientX: 200, clientY: 200 }];
+      const touches = [{ pageX: 200, pageY: 200, clientX: 200, clientY: 200 }]
+      e.touches = touches;
+      e.changedTouches = touches;
       tab.dispatchEvent(e);
       assert.equal(element.__lastTouchX, 200);
     });
@@ -467,7 +475,9 @@ describe('AnypointTabs', () => {
       const tab = element.items[4];
       element.__lastTouchX = 200;
       const e = new CustomEvent('touchmove', { bubbles: true, composed: true });
-      e.touches = e.changedTouches = [{ pageX: 200, pageY: 200, clientX: 196, clientY: 200 }];
+      const touchese = [{ pageX: 200, pageY: 200, clientX: 196, clientY: 200 }]
+      e.touches = touchese;
+      e.changedTouches = touchese;
       tab.dispatchEvent(e);
       const node = element._tabsContainer;
       assert.equal(node.scrollLeft, 4);
@@ -479,7 +489,9 @@ describe('AnypointTabs', () => {
       const node = element._tabsContainer;
       node.scrollLeft = 100;
       const e = new CustomEvent('touchmove', { bubbles: true, composed: true });
-      e.touches = e.changedTouches = [{ pageX: 200, pageY: 200, clientX: 204, clientY: 200 }];
+      const touches = [{ pageX: 200, pageY: 200, clientX: 204, clientY: 200 }]
+      e.touches = touches;
+      e.changedTouches = touches;
       tab.dispatchEvent(e);
       assert.equal(node.scrollLeft, 96);
     });
@@ -488,7 +500,9 @@ describe('AnypointTabs', () => {
       const tab = element.items[4];
       element.__lastTouchX = 200;
       const e = new CustomEvent('touchend', { bubbles: true, composed: true });
-      e.touches = e.changedTouches = [{ pageX: 200, pageY: 200, clientX: 204, clientY: 200 }];
+      const touches = [{ pageX: 200, pageY: 200, clientX: 204, clientY: 200 }]
+      e.touches = touches;
+      e.changedTouches = touches;
       tab.dispatchEvent(e);
       assert.equal(element.__lastTouchX, 0);
     });
