@@ -334,7 +334,8 @@ export class AnypointTabs extends MenubarMixin(ArcResizableMixin(LitElement)) {
       return;
     }
     node.scrollLeft += dx;
-    const { scrollLeft } = node;
+    const { scrollLeft, scrollWidth, clientWidth } = node;
+    this.hideScrollButtons = scrollWidth === clientWidth;
     this._leftHidden = scrollLeft === 0;
     this._rightHidden = scrollLeft === this._tabContainerScrollSize;
   }
