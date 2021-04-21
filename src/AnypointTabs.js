@@ -627,16 +627,19 @@ export class AnypointTabs extends MenubarMixin(ArcResizableMixin(LitElement)) {
       _touchmoveConfig,
       _touchendConfig,
       scrollable,
+      hideScrollButtons
     } = this;
     const startEvent = scrollable ? _touchstartConfig : undefined;
     const moveEvent = scrollable ? _touchmoveConfig : undefined;
     const endEvent = scrollable ? _touchendConfig : undefined;
+    const containerClass = hideScrollButtons ? 'hidden-buttons' : '';
     return html`<style>
         ${this.styles}
       </style>
       ${this._leftButtonTemplate(scrollable)}
       <div
         id="tabsContainer"
+        class="${containerClass}"
         @touchstart="${startEvent}"
         @touchmove="${moveEvent}"
         @touchend="${endEvent}"
