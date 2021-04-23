@@ -55,7 +55,7 @@ export class AnypointTabs extends MenubarMixin(ArcResizableMixin(LitElement)) {
        * If true, scroll buttons (left/right arrow) will be hidden for scrollable
        * tabs.
        */
-      hideScrollButtons: { type: Boolean },
+      hideScrollButtons: { type: Boolean, reflect: true },
 
       /**
        * If true, the tabs are aligned to bottom (the selection bar appears at the
@@ -627,19 +627,16 @@ export class AnypointTabs extends MenubarMixin(ArcResizableMixin(LitElement)) {
       _touchmoveConfig,
       _touchendConfig,
       scrollable,
-      hideScrollButtons
     } = this;
     const startEvent = scrollable ? _touchstartConfig : undefined;
     const moveEvent = scrollable ? _touchmoveConfig : undefined;
     const endEvent = scrollable ? _touchendConfig : undefined;
-    const containerClass = hideScrollButtons ? 'hidden-buttons' : '';
     return html`<style>
         ${this.styles}
       </style>
       ${this._leftButtonTemplate(scrollable)}
       <div
         id="tabsContainer"
-        class="${containerClass}"
         @touchstart="${startEvent}"
         @touchmove="${moveEvent}"
         @touchend="${endEvent}"

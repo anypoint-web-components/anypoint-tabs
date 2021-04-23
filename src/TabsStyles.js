@@ -27,7 +27,7 @@ export default css`
     flex: 1 1 auto;
   }
   
-  .hidden-buttons {
+  :host([hidescrollbuttons]) #tabsContainer {
     padding: 0 48px;
   }
 
