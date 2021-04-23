@@ -26,6 +26,10 @@ export default css`
     overflow: hidden;
     flex: 1 1 auto;
   }
+  
+  :host([hidescrollbuttons]) #tabsContainer {
+    padding: 0 48px;
+  }
 
   #tabsContent {
     height: 100%;
