@@ -1,7 +1,7 @@
 {
   "name": "@anypoint-web-components/anypoint-tabs",
   "description": "Accessible tabs styled for Material Design and Anypoint platform",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "license": "Apache-2.0",
   "main": "index.js",
   "module": "index.js",
