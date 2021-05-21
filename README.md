@@ -8,7 +8,7 @@ Tabs organize content across different screens, data sets, and other interaction
 
 [![Published on NPM](https://img.shields.io/npm/v/@anypoint-web-components/anypoint-tabs.svg)](https://www.npmjs.com/package/@anypoint-web-components/anypoint-tabs)
 
-[![tests](https://github.com/anypoint-web-components/anypoint-tabs/actions/workflows/tests.yml/badge.svg)](https://github.com/anypoint-web-components/anypoint-tabs/actions/workflows/tests.yml)
+[![tests](https://github.com/anypoint-web-components/anypoint-tabs/actions/workflows/deployment.yml/badge.svg)](https://github.com/anypoint-web-components/anypoint-tabs/actions/workflows/deployment.yml)
 
 ## Usage
 
