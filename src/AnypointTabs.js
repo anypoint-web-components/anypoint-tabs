@@ -342,7 +342,7 @@ export class AnypointTabs extends MenubarMixin(ArcResizableMixin(LitElement)) {
 
   _affectScrollButton() {
     const { scrollWidth, clientWidth } = this._tabsContainer;
-    const shouldHideButtons = scrollWidth >= clientWidth
+    const shouldHideButtons = scrollWidth <= clientWidth
     if (shouldHideButtons !== this.hideScrollButtons) {
       this.hideScrollButtons = shouldHideButtons;
     }
