@@ -2,7 +2,8 @@ import {
   html,
   fixture,
   assert,
-  aTimeout
+  aTimeout,
+  nextFrame
 } from '@open-wc/testing';
 import * as MockInteractions from '@polymer/iron-test-helpers/mock-interactions.js';
 import '../anypoint-tabs.js';
@@ -505,6 +506,28 @@ describe('AnypointTabs', () => {
       e.changedTouches = touches;
       tab.dispatchEvent(e);
       assert.equal(element.__lastTouchX, 0);
+    });
+  });
+
+  describe('Hiding scroll', () => {
+    let element = (null)
+
+    it('should hide arrows when there are not enough tabs to scroll', async () => {
+      element = await scrollableFixture(3)
+      element.hideScrollButtons = true;
+      await nextFrame();
+      element.style.width = '500px';
+      await nextFrame();
+      assert.isNotEmpty(element.shadowRoot.querySelectorAll('anypoint-icon-button.hidden'))
+    });
+
+    it('should show arrows when the element\'s width decreases enough', async () => {
+      element = await scrollableFixture(3)
+      element.hideScrollButtons = true;
+      await nextFrame();
+      element.style.width = '100px';
+      await nextFrame()
+      assert.isEmpty(element.shadowRoot.querySelectorAll('anypoint-icon-button.hidden'))
     });
   });
 });
