@@ -526,7 +526,7 @@ describe('AnypointTabs', () => {
       element.hideScrollButtons = true;
       await nextFrame();
       element.style.width = '100px';
-      await nextFrame()
+      await aTimeout(100);
       assert.isEmpty(element.shadowRoot.querySelectorAll('anypoint-icon-button.hidden'))
     });
   });
