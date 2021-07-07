@@ -1,6 +1,6 @@
 import { html, css } from 'lit-element';
-import '@polymer/paper-ripple/paper-ripple.js';
-import { AnypointButton } from '@anypoint-web-components/anypoint-button/src/AnypointButton.js';
+import '@anypoint-web-components/material-ripple/material-ripple.js';
+import { AnypointButton } from '@anypoint-web-components/anypoint-button';
 
 export class AnypointTab extends AnypointButton {
   get styles() {
@@ -36,7 +36,7 @@ export class AnypointTab extends AnypointButton {
           padding: 0;
         }
 
-        paper-ripple {
+        material-ripple {
           color: var(--anypoint-tab-ink, var(--accent-color));
         }
 
@@ -113,6 +113,6 @@ export class AnypointTab extends AnypointButton {
       <div class="tab-content">
         <slot></slot>
       </div>
-      <paper-ripple .noink="${stopRipple}"></paper-ripple>`;
+      <material-ripple .noink="${stopRipple}"></material-ripple>`;
   }
 }

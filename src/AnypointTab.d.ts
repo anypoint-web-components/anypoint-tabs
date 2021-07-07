@@ -1,6 +1,5 @@
 import { TemplateResult, CSSResult } from 'lit-element';
-import '@polymer/paper-ripple/paper-ripple.js';
-import { AnypointButton } from '@anypoint-web-components/anypoint-button/src/AnypointButton.js';
+import { AnypointButton } from '@anypoint-web-components/anypoint-button';
 
 export class AnypointTab extends AnypointButton {
   get styles(): CSSResult;
