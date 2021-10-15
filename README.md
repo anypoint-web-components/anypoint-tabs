@@ -1,4 +1,8 @@
-# Anypoint tabs
+# Deprecated
+
+This component has been moved to `anypoint-web-components/awc`.
+
+-----
 
 This component is based on Material Design menu and adjusted for Anypoint platform components.
 
